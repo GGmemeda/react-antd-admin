@@ -1,0 +1,151 @@
+@import "../../style/variable";
+
+.cloud-btn1(@color) {
+  width: 87px;
+  height: 30px;
+  border-radius: 15px;
+  border-color: @color;
+  background-color: @color;
+  color: #fff;
+  font-size: @font-size-base;
+  line-height: 1.0;
+  text-align: center;
+  &:hover {
+    width: 87px;
+    height: 30px;
+    border-radius: 15px;
+    border-color: @color;
+    background-color: @color;
+    opacity: .3
+  }
+}
+
+.cloud-btn2(@color) {
+  width: 87px;
+  height: 30px;
+  border-radius: 15px;
+  border: solid 1px @color;
+  font-size: @font-size-base;
+  line-height: 1.0;
+  text-align: center;
+  color: @contentText;
+  &:hover {
+    width: 68px;
+    height: 30px;
+    border-radius: 15px;
+    border: solid 1px @color;
+    font-size: @font-size-base;
+    line-height: 1.0;
+    text-align: center;
+    color: @contentText;
+    opacity: .3
+  }
+}
+
+.search-block {
+  padding: 0 10px;
+  background: #F7F7F7;
+  .search-middle {
+    margin: 0 10px;
+  }
+  .search-line {
+    display: inline-block;
+    background: #FF8314;
+    width: 4px;
+    height: 16px;
+    vertical-align: middle;
+    margin-right: 10px;
+  }
+  .top-title {
+    padding: 0 15px;
+    color: #343434;
+    font-size: 14px;
+    border-bottom: 1px solid #B2B2B2;
+    height: 36px;
+    border-radius: 8px 8px 0 0;
+    line-height: 36px;
+  }
+  .panel-open {
+    float: right;
+    font-size: @font-size-title;
+  }
+  .open-collapsed {
+    display: block;
+  }
+  .close-collapsed {
+    display: none;
+  }
+  .search-bar-open {
+    float: right;
+    cursor: pointer;
+    user-select: none;
+    font-size: 14 @font-size-title;
+  }
+  .open-collapsed {
+    display: block;
+  }
+  .close-collapsed {
+    display: none;
+  }
+  .search-bar {
+    position: relative;
+    padding: 14px 15px 0 15px;
+    .field {
+      margin-bottom: 14px;
+      display: inline-block;
+      align-items: center;
+      margin-right: 20px;
+      .input {
+        display: flex;
+        //display: inline-block;
+        vertical-align: middle;
+        align-items: center;
+        .title {
+          text-align: left;
+          display: inline-block;
+          vertical-align: middle;
+          font-size: @font-size-base;
+          color: #343434;
+          margin-right: 10px;
+        }
+
+      }
+      .warning {
+        color: red;
+        text-align: center;
+        margin-left: 105px;
+      }
+    }
+    .buttonGroup {
+      align-self: center;
+      margin-left: 24px;
+      float: right;
+      height: 47px;
+      button {
+        height: 30px;
+        font-size: @font-size-title;
+        border: none;
+        padding: 0;
+        margin-right: 0;
+      }
+      .search-bar-close {
+        font-size: 14px;
+        position: absolute;
+        cursor: pointer;
+        bottom: 2px;
+        right: 15px;
+        i {
+          margin-left: 16px;
+        }
+      }
+
+      .reset {
+        .cloud-btn2(@searchBackground)
+      }
+      .search {
+        .cloud-btn1(@searchBackground)
+      }
+    }
+  }
+}
+

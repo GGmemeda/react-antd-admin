@@ -1,0 +1,77 @@
+@import "../../style/variable";
+
+.form-modal {
+  .ant-modal-body {
+    padding: 0 12px 12px 12px;
+  }
+  .modal-title {
+    border-bottom: 1px solid #B3B3B3;
+    padding: 7px 0;
+    line-height: normal;
+    margin-bottom: 10px;
+    .inner-title {
+      font-size: 14px;
+      display: inline-block;
+    }
+    .close-icon {
+      font-size: 18px;
+      margin-left: 8px;
+      position: relative;
+      top: 8px;
+      vertical-align: top;
+    }
+    .right-close {
+      float: right;
+      font-size: 14px;
+      cursor: pointer;
+      position: relative;
+      top: -5px;
+    }
+  }
+  .modal-content{
+    padding-top: 10px;
+    background: #FAFAFA;
+  }
+}
+
+.formWrapper {
+  :global {
+    .ant-form-item {
+      // font-size: 14px;
+      //label {
+      //  font-size: 14px;
+      //}
+    }
+  }
+  .modal-button {
+    border-radius: 15px;
+    width: 87px;
+    height: 30px;
+  }
+  .form-item-control-wrapper {
+    margin-left: 0;
+    width: 100%;
+    text-align: center;
+  }
+  .form-more {
+    text-align: center;
+    margin-bottom: 5px;
+    cursor: pointer;
+    user-select: none
+  }
+  .ant-form-item-label label{
+    color:#387EE7 ;
+  }
+  .ant-form-item {
+    margin-bottom: 10px;
+  }
+  .buttons {
+    justify-content: center;
+    margin-top: 10px;
+    .save-button {
+      background: #fff;
+      color: @contentText;
+      border: 1px solid @contentText;
+    }
+  }
+}
