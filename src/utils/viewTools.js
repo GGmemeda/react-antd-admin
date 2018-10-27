@@ -21,23 +21,11 @@ export const viewsConfig = function (pageEntity) {
   @connect(
     (state) => {
       return ({
-        emums: state.emums.data,
-        permissions: state.permission.data,
-        loginUser: state.loginUser.data,
-        layoutLoading: state.layoutLoading,
+         layoutLoading: state.layoutLoading,
       });
     }, {actionLoading}
   )
   class HighOrderComponent extends React.Component {
-    componentDidMount() {
-      setTimeout(() => {
-        if (!(this.props.loginUser ) || !(this.props.permissions && this.props.permissions instanceof Array)) {
-          clearAuth();
-          history.push('/login');
-        }
-      }, 1000);
-    }
-
     render() {
       const {loading} = this.props.layoutLoading;
       return <Layout.Content className="content" id="content">

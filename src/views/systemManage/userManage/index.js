@@ -203,14 +203,12 @@ export default class UserManage extends React.Component {
           />
           <div className='common-block'>
             <div className='operate-buttons'>
-              {permissions.includes('PERMS_USER_DELETE') ?
+
                 <span onClick={this.deleteMulti} className='inactive-text delete-multi'>
                 <i className='rvicon rvicon-shanchu'/>
                  批量删除
-              </span> : ''}
-              {permissions.includes('PERMS_USER_CREATE') ?
+              </span>
                 <span onClick={this.addUser} className='active-text'><Icon type="plus"/>新增</span>
-                : ''}
             </div>
             <CusTable
               onCtrlClick={this.tableAction}
@@ -227,30 +225,24 @@ export default class UserManage extends React.Component {
               loading={userList.isFetching}
               action={row => {
                 const operateButtons = [];
-                if (permissions.includes(`PERMS_USER_MODIFY`)) {
                   operateButtons.push({
                     key: 'edit',
                     name: '编辑',
                     color: 'active-text',
                     customIcon: <i className={'rvicon rvicon-bianji'}/>,
                   });
-                }
-                if (permissions.includes('PERMS_USER_RESETPWD')) {
                   operateButtons.push({
                     key: 'reset',
                     name: '重置密码',
                     color: 'red',
                   });
-                }
-                if (permissions.includes(`PERMS_USER_DELETE`)) {
+
                   operateButtons.push({
                     key: 'delete',
                     name: '删除',
                     color: 'red',
                     customIcon: <i className={'rvicon rvicon-shanchu'}/>
                   });
-                }
-
                 return operateButtons;
               }}
             />

@@ -42,18 +42,6 @@ export default class LoginPage extends React.Component {
       });
     });
   };
-  //获取河长详情
-  getChiefDetail = async (paramId) => {
-    return new Promise((resolve, reject) => {
-      chiefManage.getDetail(paramId).then(res => {
-        if (res.code === 200) {
-          resolve(res.data);
-        } else {
-          resolve({});
-        }
-      });
-    });
-  };
   handleSubmit = (e) => {
     e.preventDefault();
     let n = this.props.form.getFieldsValue().userName;

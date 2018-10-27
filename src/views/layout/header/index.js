@@ -1,24 +1,17 @@
 import React from 'react';
-import {Menu, Icon, Layout, Avatar, Dropdown, Badge, message} from 'antd';
-import {Link} from 'react-router-dom';
+import { Menu, Icon, Layout, Avatar, Dropdown, Badge, message } from 'antd';
+import { Link } from 'react-router-dom';
 import './index.less';
-import {removeToken, clearAuth} from 'utils/auth';
-import {connect} from 'react-redux';
+import { removeToken, clearAuth } from 'utils/auth';
+import { connect } from 'react-redux';
 import ResetPwd from './ResetPwd';
 
-const {Header} = Layout;
+const { Header } = Layout;
 @connect(
-  (state) => {
-    return ({
-      loginUser: state.loginUser.data,
-      loginUserAllData: state.loginUser,
-      permissions: state.permission.data
-    });
-  }
 )
 
 export default class Top extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       username: '',
@@ -26,25 +19,13 @@ export default class Top extends React.Component {
       messageTotal: 0,
       modalShow: false
     };
-    this.messageUnradData = {
-      status: 'UNREAD',
-      pageSize: 10,
-      page: 1
-    };
   }
 
-
-
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.setState = () => {
       return;
     };
   }
-
-  componentDidMount() {
-
-  }
-
 
   onCancel = () => {
     this.setState({
@@ -61,13 +42,10 @@ export default class Top extends React.Component {
         visible: true
       });
     }
-    if (item.key === 'feedback') {
-      this.setState({modalShow: true});
-    }
   };
   goMessagePage = () => {
     sessionStorage.setItem('activeItem', 'messageNotification');
-    location.href = "/messageNotification";
+    location.href = '/messageNotification';
   };
   menu = (
     <Menu className="logOut" onClick={this.dropDownEvents}>
@@ -84,15 +62,15 @@ export default class Top extends React.Component {
     }
   };
 
-  render() {
+  render () {
     const loginUser = this.props.loginUser && this.props.loginUser.principal || {};
     console.log(loginUser);
     return (
-      <Header className='header-top' style={{background: '#fff'}}>
-        <img className='logo' src={require("../../../images/logo.jpg")} alt=""/>
+      <Header className='header-top' style={{ background: '#fff' }}>
+        <img className='logo' height='50px' src={require('../../../images/logo.jpg')} alt=""/>
         <div className='header-right'>
             <span className='message-out' onClick={this.goMessagePage}>
-            <Badge count={this.state.messageTotal}>
+            <Badge count={this.state.messageTotal || 0}>
               <i className='rvicon rvicon-xiaoxi'/>
             </Badge>
           </span>
@@ -104,7 +82,6 @@ export default class Top extends React.Component {
           </Dropdown>
         </div>
         <ResetPwd onCancel={this.onCancel} visible={this.state.visible}/>
-
       </Header>
     );
   }
