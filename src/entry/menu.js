@@ -6,17 +6,18 @@ export default () => {
     {
       name: '首页',
       url: 'index',
-      icon: 'rvicon rvicon-shouye',
+      icon: 'home',
     },
     {
       name: '基础信息',
       url: 'basicMessage',
+      icon: 'user',
       children: [
         {
           name: '用户配置',
           url: 'userManage',
           children: [
-            {name: '用户管理', url: 'userManage'},
+            { name: '用户管理', url: 'userManage' },
           ]
         }
       ]

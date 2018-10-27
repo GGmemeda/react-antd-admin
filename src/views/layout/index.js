@@ -1,53 +1,54 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {Layout} from 'antd';
+import { Link } from 'react-router-dom';
+import { Layout, Button, Icon } from 'antd';
 import Top from './header';
 import Footer from './bottom';
 import './index.less';
-import {Provider} from 'context';
+import { Provider } from '../../context.js';
 import Nav from './menu';
-import {connect} from 'react-redux';
-import {actionEmums} from 'actions/basic';
-import RouterPages from "../../routes/routesPages";
+import { connect } from 'react-redux';
+import { actionEmums } from 'actions/basic';
+import RouterPages from '../../routes/routesPages';
 
+const { Sider } = Layout;
 
-@connect(
-  (state) => {
-    return ({
-      loginUser: state.loginUser.data,
-      permissions: state.permission.data
-    });
-  }, {actionEmums}
-)
-
+@connect()
 export default class Container extends React.Component {
   state = {
-    theme: 'light',
+    theme: 'dark',
     current: 'index',
-    collapsed: false,
-    mode: 'horizontal',
-    marginLeft: 200,
+    collapsed: true,
+    mode: 'vertical',
     test: '改变颜色',
     breadList: [],
   };
-
   toggle = () => {
     this.setState({
       collapsed: !this.state.collapsed,
       mode: this.state.collapsed ? 'inline' : 'vertical',
-      marginLeft: this.state.collapsed ? 200 : 80
     });
   };
 
-
-  render() {
+  render () {
     return (
       <Provider value={this.state}>
         <Layout className="containAll">
-          <Top toggle={this.toggle} collapsed={this.state.collapsed}/>
-          <Nav  permission={this.props.permissions}/>
-          <RouterPages/>
-          <Footer/>
+          <Sider
+            collapsible
+            collapsed={this.state.collapsed}
+            onCollapse={this.toggle}
+            theme={this.state.theme}
+          >
+            <div className='collapse-icon'  >
+              <Icon type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}/>
+            </div>
+            <Nav mode={this.state.mode} theme={this.state.theme}/>
+          </Sider>
+          <Layout>
+            <Top toggle={this.toggle}/>
+            <RouterPages/>
+            <Footer/>
+          </Layout>
         </Layout>
       </Provider>
     );

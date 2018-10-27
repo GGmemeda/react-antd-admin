@@ -64,7 +64,6 @@ export default class Top extends React.Component {
     console.log(loginUser);
     return (
       <Header className='header-top' style={{ background: '#fff' }}>
-        <img className='logo' height='50px' src={require('../../../images/logo.jpg')} alt=""/>
         <div className='header-right'>
             <span className='message-out' onClick={this.goMessagePage}>
             <Badge count={this.state.messageTotal || 0}>

@@ -1,11 +1,10 @@
 import React from 'react';
-import {Route, Redirect, Switch} from 'react-router-dom';
-import {removeToken, clearAuth} from 'utils/auth';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import pageConfig from '../entry/pageConfig';
-import {viewsConfig} from "../utils/viewTools";
+import { viewsConfig } from '../utils/viewTools';
 
 export default class RouterPages extends React.Component {
-  render() {
+  render () {
     return (
       <Switch>
         <Route exact path='/' component={viewsConfig(pageConfig['/index'])}/>;

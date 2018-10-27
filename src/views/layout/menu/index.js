@@ -10,7 +10,6 @@ const SubMenu = Menu.SubMenu;
 
 export default class Nav extends React.Component {
   state = {
-    theme: 'dark',
     current: [],
     mode: 'dark',
     messageNum: 50,
@@ -72,8 +71,7 @@ export default class Nav extends React.Component {
         if (subMenu.permission && !this.requireAuth(subMenu.permission)) return;
         return (<SubMenu key={subMenu.url} className={this.currentActive(subMenu.url)}
                          title={<div className='menu-link'>
-                           <div className='one-line'/>
-                           <i className={`icon-font  ${subMenu.icon}`}/>
+                           <Icon type={subMenu.icon} theme="outlined" />
                            <span className='menu-name'>{subMenu.name}</span>
                          </div>}>
           {this.constructMenu(subMenu.children, currentString)}
@@ -85,8 +83,7 @@ export default class Nav extends React.Component {
         return (
           <Menu.Item key={subMenu.url}>
             <Link to={`/${subMenu.url}`} className='menu-link'>
-              <div className='one-line'/>
-              {subMenu.icon ? <i className={`icon-font ${subMenu.icon}`}/> : ''}
+              {subMenu.icon ?  <Icon type={subMenu.icon} theme="outlined" /> : ''}
               <span className='menu-name'>{subMenu.name}</span>
             </Link>
           </Menu.Item>
@@ -101,13 +98,13 @@ export default class Nav extends React.Component {
   render() {
     return (
       <Menu
-        theme={this.state.theme}
+        theme={this.props.theme}
         onClick={this.handleClick}
         defaultOpenKeys={['']}
         selectedKeys={this.state.current}
         className="menu menu-out clearfix"
-        mode="inline"
-
+        mode={this.props.mode}
+        width={200}
       >
         {this.constructMenu(allMenu())}
       </Menu>

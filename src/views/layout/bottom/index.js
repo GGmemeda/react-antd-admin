@@ -12,8 +12,7 @@ export default class Bottom extends React.Component {
     return (
       <Footer className="bottom">
         <div className="text">
-          <div>
-          </div>
+          ©copyright
         </div>
       </Footer>
     );
