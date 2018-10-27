@@ -1,4 +1,3 @@
-import {getEmums} from 'api/basic';
 import {LOGINBYUSER} from "./login";
 
 export const CONTENTLOADING = 'CONTENTLOADING';
@@ -27,12 +26,6 @@ export const actionLoading = (status) =>{
   });
 };
 
-export const actionEmums = (data) => ({
-  type: EMUMS,
-  payload: {
-    promise: getEmums(data)
-  }
-});
 
 
 export const actionPermissions = (data) => ({

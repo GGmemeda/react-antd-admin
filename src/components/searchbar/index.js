@@ -10,8 +10,6 @@ import {
   InputNumber
 } from 'antd';
 import './index.less';
-import CascaderRegion from '../../views/components/CascaderRegion';
-import OrganizationSelect from 'views/components/OrganizationSelect';
 import locale from 'antd/lib/date-picker/locale/zh_CN';
 
 const {MonthPicker, WeekPicker} = DatePicker;
@@ -150,30 +148,6 @@ export default class SearchBar extends React.Component {
           onChange={value => this.setField(field, value)}
           showSearch
         />);
-        break;
-      case 'cascaderRegion':  // 区域级联
-        component = (<CascaderRegion
-          ref={node => this.cascaderRegion = node}
-          onChange={value => {
-            this.setField(field, value);
-            this.resetComponent(field.clearKeys);
-          }}
-          regoinValue={!this.state.fields[field.key] ? field.defaultValue : this.state.fields[field.key]}
-          onPopupChange={(value) => {
-            if ('selectChange' in this.props && this.props.selectChange) {
-              this.props.selectChange(value, field, this.state.fields);
-            }
-
-          }} options={field.options || []}/>);
-        break;
-      case 'OrganizationSelect':  // 组织机构选择
-        component = (<OrganizationSelect
-          areaId={field.areaId || ''}
-          placeholder={field.placeholder}
-          ref={node => this.OrganizationSelect = node}
-          onChange={value => {
-            this.setField(field, value);
-          }} options={field.options || []}/>);
         break;
       case 'Number':
         component = (<InputNumber

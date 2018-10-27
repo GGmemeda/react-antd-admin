@@ -24,9 +24,6 @@ const FormItem = Form.Item;
 export default class LoginPage extends React.Component {
   constructor(props) {
     super(props);
-    if (!(this.props.emums && this.props.emums.data && this.props.emums.data.length > 0)) {
-      this.props.actionEmums();
-    }
     this.state = {
       loading: false
     };
@@ -117,8 +114,7 @@ export default class LoginPage extends React.Component {
     return (
       <div className="login-page-wrap">
         <div className="top-login clearfix">
-          <img  src={require("../../images/login/s-logo.png")} alt="react后台管理系统"/>
-          <img height={90} className='right-water' src={require('../../images/login/diq.png')} alt=""/>
+          <img  src='' alt="react后台管理系统"/>
         </div>
         <div className="box-out">
           <div className="box clearfix">

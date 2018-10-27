@@ -15,17 +15,9 @@ import {
 } from 'antd';
 
 const {RangePicker} = DatePicker;
-import RvUpload from 'components/upload/Upload';
-import RvUploads from 'components/upload/Uploads';
-import CascaderRegion from 'views/components/CascaderRegion';
-import OrganizationSelect from 'views/components/OrganizationSelect';
-import CompanySelect from 'views/components/CompanySelect';
+
 import CommonSelect from '../../views/components/CommonSelect';
-import GetLocation from 'views/components/AddressChoose';
-import ChiefSelect from 'views/components/OrganizationSelect/ChiefOrganizationSelect';
-import RiverReachChoose from "views/components/MultiSelect/RiverReachChoose";
-import ReservoirChoose from "views/components/MultiSelect/ReservoirChoose";
-import LakesChoose from "views/components/MultiSelect/LakesChoose";
+
 
 const FormItem = Form.Item;
 const RadioGroup = Radio.Group;
@@ -265,40 +257,6 @@ export default class ModalForm extends React.Component {
                     disabled={field.options && field.options.disabled}/>);
 
 
-  getLocationField = (field, formData) => {
-    let useValue = '';
-    let usePoint = '';
-    let userArray = field.lookRegisterAttr || field.registerAttr;
-    if (this.props.formKey === 'edit' && formData) {
-      useValue = formData[userArray[0]];
-      usePoint = formData[userArray[1]];
-    }
-    return (<GetLocation
-      locationValue={useValue}
-      locationPoint={usePoint}
-      onChange={(place, point) => {
-        const changeValues = {};
-        if (!point) {
-          setTimeout(() => {
-            changeValues[userArray[0]] = {
-              value: place,
-              errors: [new Error('请打开地址选点')],
-            };
-            this.props.form.setFields(changeValues);
-          }, 500);
-
-        }
-        if (place && point && point.latitude && point.longitude) {
-          changeValues[userArray[0]] = place;
-          changeValues[userArray[1]] = point;
-          // instance.upData = Object.assign({}, instance.upData, changeValues);
-          this.props.form.setFieldsValue(changeValues);
-        }
-      }}
-      readonly={field.eleOptions && field.eleOptions.readonly || ''}
-      showLatLon={field.showLatLon || false}
-    />);
-  };
 
   getSelectField = field => {
     let items = field.items || [];
@@ -391,186 +349,12 @@ export default class ModalForm extends React.Component {
     />);
   };
 
-  getUploadField = (field, formData) => {
-    let lookUrl = '';
-    const instance = this;
-    const userName = field.lookName || field.name;
-    if (this.props.formKey === 'edit') {
-      lookUrl = formData[userName];
-    }
-    return <RvUpload width={100}
-                     height={100}
-                     imgValue={lookUrl}
-                     clear={() => {
-                       instance.props.formData[userName] = '';
-                       const changValue = {};
-                       changValue[userName] = '';
-                       instance.props.form.setFieldsValue(changValue);
-                     }}
-
-    >
-    </RvUpload>;
-  };
-  getUploadsField = (field, formData) => {
-    let lookUrl = '';
-    const instance = this;
-    const userName = field.lookName || field.name;
-    if (this.props.formKey === 'edit' || this.props.formKey === 'look') {
-      lookUrl = formData[userName];
-      if (lookUrl.length > 0 && typeof  lookUrl[0] === 'string') {
-        lookUrl = lookUrl.map((ele, index) => ({
-          url: ele, raw: index, uid: index,
-          name: ele, status: 'done'
-        }));
-      }
-    }
-    return <RvUploads width={100}
-                      height={100}
-                      imageValues={lookUrl}
-                      lookKey={this.props.formKey === 'look'}
-                      onChange={(values) => {
-                        if (this.props.formKey === 'edit') {
-                          const changValue = {};
-                          changValue[userName] = values;
-                          instance.props.formData[userName] = values;
-                          instance.props.form.setFieldsValue(changValue);
-                        }
-                      }}
-                      {...field.options}
-    >
-    </RvUploads>;
-  };
-  getCascaderRegion = (field, formData) => {
-    const _this = this;
-    const userName = field.editName || field.lookName || field.name;
-    let useValue = '';
-    if (formData && formData[userName] && this.props.formKey !== 'add') {
-      useValue = formData[userName];
-    }
-    return <CascaderRegion regoinValue={useValue} ref={node => this.regionChoose = node} onChange={value => {
-      const changValue = {};
-      changValue[field.name] = value;
-      _this.props.form.setFieldsValue(changValue);
-      _this.resetComponents(field.clearField);
-    }}
-                           onPopupChange={(value) => {
-                             _this.changeProps(value, field);
-                           }}
-                           options={field.options || []}/>;
-  };
   changeProps = (value, field) => {
     if ('selectChange' in this.props && this.props.selectChange) {
       const allData = this.props.form.getFieldsValue();
       this.props.selectChange(value, field, allData);
     }
   };
-  getChiefSelect = (field, formData) => {
-    let useName = field.editName || field.name;
-    let useValue = '';
-    if (this.props.formKey === 'edit' || this.props.formKey === 'look') {
-      useValue = formData[useName];
-    }
-    const instance = this;
-    return <ChiefSelect
-      lookKey={instance.props.formKey === 'look'}
-      chiefValue={useValue || ''}
-      onChange={(values) => {
-
-      }}/>;
-  };
-  getRiverReachChooseField = (field, formData) => {
-    const instance = this;
-    let fieldValue = '';
-    if (this.props.formKey === 'edit' || this.props.formKey === 'look') {
-      fieldValue = formData[field['editName']];
-    }
-    return <RiverReachChoose
-      lookKey={instance.props.formKey === 'look'}
-      values={fieldValue}
-      onChange={(value) => {
-        const changValue = {};
-        changValue[field.name] = value;
-        if (fieldValue) {
-          formData[field['editName']] = value;
-        }
-        instance.props.form.setFieldsValue(changValue);
-      }
-      }
-    />;
-  };
-  getReservoirChooseField = (field, formData) => {
-    const instance = this;
-    let fieldValue = '';
-    if (this.props.formKey === 'edit' || this.props.formKey === 'look') {
-      fieldValue = formData[field['editName']];
-    }
-    return <ReservoirChoose
-      lookKey={instance.props.formKey === 'look'}
-      values={fieldValue}
-      onChange={(value) => {
-        const changValue = {};
-        changValue[field.name] = value;
-        if (fieldValue) {
-          formData[field['editName']] = value;
-        }
-        instance.props.form.setFieldsValue(changValue);
-      }
-      }
-    />;
-  };
-  getLakesChooseField = (field, formData) => {
-    const instance = this;
-    let fieldValue = '';
-    if (this.props.formKey === 'edit' || this.props.formKey === 'look') {
-      fieldValue = formData[field['editName']];
-    }
-
-    return <LakesChoose
-      lookKey={instance.props.formKey === 'look'}
-      values={fieldValue}
-      onChange={(value) => {
-        const changValue = {};
-        changValue[field.name] = value;
-        if (fieldValue) {
-          formData[field['editName']] = value;
-        }
-        instance.props.form.setFieldsValue(changValue);
-      }
-      }
-    />;
-  };
-  getOrganizationSelect = (field, formData) => {
-    const instance = this;
-    let useValue = '';
-    const userName = field.editName || field.lookName || field.name;
-    if (this.props.formKey === 'edit') {
-      useValue = formData[userName];
-    }
-    return <OrganizationSelect
-      organizationValue={useValue}
-      onChange={value => {
-        const changValue = {};
-        changValue[field.name] = value;
-        this.changeProps(value, field);
-        if (useValue) {
-          formData[userName] = value;
-        }
-        instance.props.form.setFieldsValue(changValue);
-      }} options={field.options || []}/>;
-  };
-  getCompanySelect = (field, formData) => {
-    return <CompanySelect
-      mode={field.mode||undefined}
-      attr={field.eleOptions || []}/>;
-  };
-  getCommonSelect = (field, formData) => {
-    return <CommonSelect
-      typeMode={field.typeMode}
-      mode={field.mode||undefined}
-      attr={field.eleOptions || []}/>;
-  };
-
-
   generateFormFields = (fields, formKey, formData) => {
     let lookStatus = false;
     if (formKey === 'look') {

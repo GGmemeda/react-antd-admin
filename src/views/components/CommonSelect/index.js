@@ -1,12 +1,11 @@
 import React from 'react';
 import {Select, Spin} from 'antd';
 import debounce from 'lodash/debounce';
-import {companyList as  company} from 'api/company';
 import {userList as user} from '../../../api/user';
 
 const Option = Select.Option;
 
-export default class CompanySelect extends React.Component {
+export default class CommonSelect extends React.Component {
   constructor(props) {
     super(props);
     this.fetch = debounce(this.fetch, 800);
@@ -17,11 +16,7 @@ export default class CompanySelect extends React.Component {
       fetching: false,
     };
     this.fechList = {
-      company,
-      reach,
-      org,
       user,
-      chief
     };
   }
 

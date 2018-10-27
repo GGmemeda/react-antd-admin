@@ -1,6 +1,6 @@
 import React from 'react';
 import {Cascader} from 'antd';
-import {areaList, siblingsArea} from 'api/region';
+import {areaList, siblingsArea} from '../../../api';
 
 export default class CascaderRegion extends React.Component {
   state = {

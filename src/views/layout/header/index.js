@@ -1,13 +1,10 @@
 import React from 'react';
 import {Menu, Icon, Layout, Avatar, Dropdown, Badge, message} from 'antd';
 import {Link} from 'react-router-dom';
-import {mineMessageList} from 'api/messageNotification';
 import './index.less';
 import {removeToken, clearAuth} from 'utils/auth';
 import {connect} from 'react-redux';
 import ResetPwd from './ResetPwd';
-import FeedbackAdd from '../../systemManage/feedback/FeedbackAdd';
-import {createItem as feedbackCreate} from "../../../api/feedback";
 
 const {Header} = Layout;
 @connect(
@@ -36,17 +33,7 @@ export default class Top extends React.Component {
     };
   }
 
-  getMineMessageList = () => {
-    return new Promise((resolve, reject) => {
-      mineMessageList(this.messageUnradData).then(res => {
-        if (res.code === 200) {
-          resolve(res);
-        } else {
-          reject('消息列表获取失败');
-        }
-      });
-    });
-  };
+
 
   componentWillUnmount() {
     this.setState = () => {
@@ -55,11 +42,7 @@ export default class Top extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.permissions.includes("PERMS_MESSAGE_LIST")) {
-      this.getMineMessageList().then(res => {
-        this.setState({messageTotal: res.total});
-      });
-    }
+
   }
 
 
@@ -99,17 +82,6 @@ export default class Top extends React.Component {
         return ele.url;
       });
     }
-    feedbackCreate(data).then(res => {
-      this.setState({
-        modalLoading: false
-      });
-      if (res.code === 200) {
-        message.info("反馈成功!");
-        this.setState({
-          modalShow: false,
-        });
-      }
-    });
   };
 
   render() {
@@ -117,14 +89,13 @@ export default class Top extends React.Component {
     console.log(loginUser);
     return (
       <Header className='header-top' style={{background: '#fff'}}>
-        <img className='logo' src={require("images/layout/logo.png")} alt=""/>
+        <img className='logo' src={require("../../../images/logo.jpg")} alt=""/>
         <div className='header-right'>
-          {this.props.permissions && this.props.permissions instanceof Array && this.props.permissions.includes("PERMS_MESSAGE_LIST") ?
             <span className='message-out' onClick={this.goMessagePage}>
             <Badge count={this.state.messageTotal}>
               <i className='rvicon rvicon-xiaoxi'/>
             </Badge>
-          </span> : ''}
+          </span>
           <Avatar src={loginUser.avatarUrl} className='user-img' icon="user"/>
           <Dropdown overlay={this.menu}>
             <a className="ant-dropdown-link">
@@ -133,17 +104,7 @@ export default class Top extends React.Component {
           </Dropdown>
         </div>
         <ResetPwd onCancel={this.onCancel} visible={this.state.visible}/>
-        <FeedbackAdd
-          onOk={this.onOk}
-          modalShow={this.state.modalShow}
-          onCancel={() => {
-            this.setState({modalShow: false});
-          }}
-          modalData={{source: 'WEB'}}
-          modalKey={'add'}
-          title={'添加'}
-          hasDefault={true}
-        />
+
       </Header>
     );
   }

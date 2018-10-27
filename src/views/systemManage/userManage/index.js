@@ -1,20 +1,20 @@
 import React from 'react';
 import CusTable from 'components/table';
-import {connect} from 'react-redux';
-import {list} from 'actions/user';
-import {actionLoading} from 'actions/basic';
-import {Input, message, Divider, Modal, Icon} from 'antd';
-import SearchBar from '../../components/searchbar';
-import {FormModal} from '../../components/modalForm';
-import {FormField} from './formModalAdd';
-import {Consumer} from 'context';
+import { connect } from 'react-redux';
+import { list } from 'actions/user';
+import { actionLoading } from 'actions/basic';
+import { Input, message, Divider, Modal, Icon } from 'antd';
+import SearchBar from '../../../components/searchbar';
+import { FormModal } from '../../../components/modalForm';
+import { FormField } from './formModalAdd';
+import { Consumer } from 'context';
 
 const confirm = Modal.confirm;
 @connect(
-   {list, actionLoading}
+  { list, actionLoading }
 )
 export default class UserManage extends React.Component {
-  constructor(props) {
+  constructor (props) {
     super(props);
     this.state = {
       loading: false,
@@ -33,7 +33,7 @@ export default class UserManage extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentDidMount () {
     this.loginUserDomain = this.props.loginUser.principal && this.props.loginUser.principal.domain && this.props.loginUser.principal.domain.area && this.props.loginUser.principal.domain.area.level;
     this.list(this.listData);
   }
@@ -48,18 +48,18 @@ export default class UserManage extends React.Component {
     return [{
       dataIndex: 'nickname',
       title: '用户名',
-      width:100,
+      width: 100,
       render: (text, record) => {
         return <a onClick={() => this.getDetail(record, 'look', '查看')}>{text}</a>;
       }
     }, {
       dataIndex: 'loginName',
       title: '登陆账号',
-      width:100,
+      width: 100,
     }, {
       dataIndex: 'mobile',
       title: '手机号码',
-      width:100,
+      width: 100,
     }, {
       dataIndex: 'area.name',
       title: '行政区',
@@ -73,7 +73,7 @@ export default class UserManage extends React.Component {
     }, {
       dataIndex: 'role',
       title: '用户角色',
-      width:200,
+      width: 200,
     }];
   };
   searchFields = () => {
@@ -100,10 +100,9 @@ export default class UserManage extends React.Component {
 
   onSearch = (data) => {
     data.areaId = data.areaId && data.areaId[data.areaId.length - 1];
-    this.listData = Object.assign({}, data, {page: 1, pageSize: 10});
+    this.listData = Object.assign({}, data, { page: 1, pageSize: 10 });
     this.list(this.listData);
   };
-
 
   list = (data) => {
     this.props.list(data);
@@ -132,20 +131,18 @@ export default class UserManage extends React.Component {
       modalData: {}
     });
 
-
   };
   onOk = (data, formData) => {
     this.setState({
       modalLoading: true
     });
-    data.gender = "MALE";
+    data.gender = 'MALE';
     if (this.state.modalKey == 'add') {
       this.add(data);
     }
     if (this.state.modalKey == 'edit') {
       this.edit(data, formData);
     }
-
 
   };
   onCancel = () => {
@@ -159,10 +156,10 @@ export default class UserManage extends React.Component {
   selectChange = (value, field) => {
     if (field.name === 'chiefType') {
       const chiefType = value.split('_AND_');
-      this.setState({chiefType});
+      this.setState({ chiefType });
     }
     if (field.name === 'ifChief') {
-      this.setState({isChief: value});
+      this.setState({ isChief: value });
     }
   };
 
@@ -171,7 +168,7 @@ export default class UserManage extends React.Component {
       selectedRowKeys: this.state.selectedRowKeys,
       onChange: (selectedRowKeys, selectedRows) => {
         const idArray = selectedRows.map((item) => item.id);
-        this.setState({selectedRowKeys, idArray});
+        this.setState({ selectedRowKeys, idArray });
       }
     };
   };
@@ -191,11 +188,11 @@ export default class UserManage extends React.Component {
     }, 0);
   };
 
-  render() {
-    const {userList} = this.props;
+  render () {
+    const { userList } = this.props;
     const total = userList.allData && userList.allData.total || 1;
     let userData = userList.data || [];
-    const {permissions} = this.props;
+    const { permissions } = this.props;
     return (
       <div className="user-manage">
         <div className='section'>
@@ -211,7 +208,7 @@ export default class UserManage extends React.Component {
                 <i className='rvicon rvicon-shanchu'/>
                  批量删除
               </span> : ''}
-              {permissions.includes("PERMS_USER_CREATE") ?
+              {permissions.includes('PERMS_USER_CREATE') ?
                 <span onClick={this.addUser} className='active-text'><Icon type="plus"/>新增</span>
                 : ''}
             </div>
@@ -238,7 +235,7 @@ export default class UserManage extends React.Component {
                     customIcon: <i className={'rvicon rvicon-bianji'}/>,
                   });
                 }
-                if (permissions.includes("PERMS_USER_RESETPWD")) {
+                if (permissions.includes('PERMS_USER_RESETPWD')) {
                   operateButtons.push({
                     key: 'reset',
                     name: '重置密码',
