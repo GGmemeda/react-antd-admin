@@ -44,13 +44,10 @@ export default class Top extends React.Component {
     }
   };
   goMessagePage = () => {
-    sessionStorage.setItem('activeItem', 'messageNotification');
-    location.href = '/messageNotification';
+
   };
   menu = (
     <Menu className="logOut" onClick={this.dropDownEvents}>
-      <Menu.Item key="resetPwd">个人中心</Menu.Item>
-      <Menu.Item key="feedback">意见反馈</Menu.Item>
       <Menu.Item key="logOut">退出</Menu.Item>
     </Menu>
   );

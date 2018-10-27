@@ -14,8 +14,8 @@ import  Layout from   'views/layout';
 
 const Routes =()=> (
     <Switch>
-      <Route exec path="" component={Layout}/>
       <Route exec path="/login" component={Login}/>
+      <Route exec path="" component={Layout}/>
     </Switch>
 );
 const PrivateRoute = ({ component: Component, ...rest }) => (

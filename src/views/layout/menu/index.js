@@ -12,7 +12,7 @@ export default class Nav extends React.Component {
   state = {
     theme: 'dark',
     current: [],
-    mode: 'horizontal',
+    mode: 'dark',
     messageNum: 50,
     mounted: false
   };
@@ -106,8 +106,8 @@ export default class Nav extends React.Component {
         defaultOpenKeys={['']}
         selectedKeys={this.state.current}
         className="menu menu-out clearfix"
-        mode='horizontal'
-        // triggerSubMenuAction={"click"}
+        mode="inline"
+
       >
         {this.constructMenu(allMenu())}
       </Menu>
