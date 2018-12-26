@@ -18,6 +18,7 @@ export default () => {
           url: 'userManage',
           children: [
             { name: '用户管理', url: 'userManage' },
+            { name: '图片懒加载', url: 'lazyload' },
           ]
         }
       ]

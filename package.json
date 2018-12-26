@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^3.10.3",
+    "antd": "^3.11.6",
     "axios": "^0.18.0",
     "connected-react-router": "^4.3.0",
     "decimal.js": "^9.0.1",
@@ -16,7 +16,7 @@
     "nan-player": "^0.3.21",
     "nprogress": "^0.2.0",
     "prop-types": "^15.6.1",
-    "react": "^16.6.3",
+    "react": "^16.7.0",
     "react-amap": "^1.2.7",
     "react-amap-plugin-geolocation": "^0.0.2",
     "react-dom": "^16.2.0",

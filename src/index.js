@@ -26,7 +26,6 @@ ReactDOM.render(
           <LocaleProvider locale={zhCN}>
             <div>
               <Routes/>
-              {process.env.NODE_ENV === 'development' ? <DevTools/> : ''}
             </div>
           </LocaleProvider>
         </LastLocationProvider>

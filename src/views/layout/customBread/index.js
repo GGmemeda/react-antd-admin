@@ -54,7 +54,7 @@ const CustomBread = withRouter((props) => {
     </Breadcrumb.Item>
   )].concat(extraBreadcrumbItems);
   return (
-    <Breadcrumb className='bread-content' separator=">">
+    <Breadcrumb className={`bread-content ` } separator=">">
       {breadcrumbItems}
     </Breadcrumb>
   );

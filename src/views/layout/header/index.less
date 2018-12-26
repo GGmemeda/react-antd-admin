@@ -21,9 +21,8 @@
 }
 
 .header-right {
-  float: right;
-  margin-top: 16px;
-
+  flex: auto;
+  text-align: right;
   .message-out {
     display: inline-block;
     cursor: pointer;
@@ -52,24 +51,19 @@
   margin: 0 22px !important;
 }
 
-//.screenFull {
-//  font-size: 14px;
-//  cursor: pointer;
-//  transition: color .3s;
-//  float: right;
-//  margin-top: 13px;
-//  padding: 10px;
-//  &:hover {
-//    color: #108ee9;
-//  }
-//}
+
 
 .header-top {
   height: 65px !important;
   line-height: 0 !important;
   padding: 0 35px !important;
+  display: flex;
+  align-items: center;
   .logo {
     margin-top: 10px;
+  }
+  .bread-content {
+    display: inline-block;
   }
 }
 

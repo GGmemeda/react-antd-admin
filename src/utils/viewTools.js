@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Loadable from 'react-loadable';
-import CustomBread from '../views/layout/customBread';
 import { Layout, Spin } from 'antd';
 import history from '../utils/history';
 import { actionLoading } from 'actions/basic';
@@ -30,15 +29,7 @@ export const viewsConfig = function (pageEntity) {
     render () {
       const { loading } = this.props.layoutLoading;
       return <Layout.Content className="content" id="content">
-        <Spin tip="Loading..." spinning={loading} wrapperClassName='wrapper-content-loading'>
-          {pageEntity.hideBread ?
-            <PageComponent  {...this.props}/> :
-            <div className='has-bread-content'>
-              <CustomBread/>
-              <PageComponent  {...this.props}/>
-            </div>
-          }
-        </Spin>
+        <PageComponent  {...this.props}/>
       </Layout.Content>;
     }
   }

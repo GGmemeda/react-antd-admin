@@ -5,6 +5,7 @@ import './index.less';
 import { removeToken, clearAuth } from 'utils/auth';
 import { connect } from 'react-redux';
 import ResetPwd from './ResetPwd';
+import CustomBread from '../customBread';
 
 const { Header } = Layout;
 @connect(
@@ -64,6 +65,7 @@ export default class Top extends React.Component {
     console.log(loginUser);
     return (
       <Header className='header-top' style={{ background: '#fff' }}>
+        <CustomBread className='header-bread'/>
         <div className='header-right'>
             <span className='message-out' onClick={this.goMessagePage}>
             <Badge count={this.state.messageTotal || 0}>

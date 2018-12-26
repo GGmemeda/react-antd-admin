@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
-
-function Example () {
+//hooks解决的问题在于：解决组件嵌套地狱
+//hooks之在函数组件中存在
+//hooks将所有生命周期归于useEffect，每一次渲染都会触发
+//useMemo对复杂数据进行过滤
+export  default  function () {
+  //count为状态初始值，通过setCount来进行更新
   const [count, setCount] = useState(0);
 
   // Similar to componentDidMount and componentDidUpdate:
