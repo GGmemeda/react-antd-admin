@@ -1,7 +1,7 @@
 const defaultPages = {
   '/index': {
     hideBread: true,
-    loader: () => import('../views/index/index.js')
+    loader: () => import('../views/home')
   },
   '/userManage': {
     breadName: ['基础信息 ', '用户管理'],

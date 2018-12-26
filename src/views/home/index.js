@@ -13,7 +13,6 @@ export default class App extends Component {
               fragement测试一下
             </div>
           </React.Fragment>
-          <div className='test-lazy-load'/>
         </div>
       </div>
     );

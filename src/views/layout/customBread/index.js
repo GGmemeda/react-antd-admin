@@ -15,7 +15,7 @@ const CustomBread = withRouter((props) => {
   }
   let breadInstance;
   let extraBreadcrumbItems;
-  const breadName = pageConfig[currentPathName]['breadName'];
+  const breadName = pageConfig[currentPathName]&&pageConfig[currentPathName]['breadName'];
   if (breadName instanceof Array) {
     extraBreadcrumbItems = breadName.map(function (item, num) {
       const url = `${currentPathName}`;
