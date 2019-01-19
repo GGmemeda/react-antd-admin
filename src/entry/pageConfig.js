@@ -11,6 +11,14 @@ const defaultPages = {
     breadName: ['基础信息 ', '图片懒加载'],
     loader: () => import('../views/lazyload')
   },
+  '/pureComponent': {
+    breadName: ['react组件 ', 'pure组件'],
+    loader: () => import('../views/pureComponent')
+  },
+  '/compareComponent': {
+    breadName: ['react组件 ', 'pure组件'],
+    loader: () => import('../views/pureComponent/compareComponent.js')
+  },
   '/404': {
     hideBread: true,
     loader: () => import('../views/404Pages/404'),

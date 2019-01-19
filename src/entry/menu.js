@@ -17,11 +17,19 @@ export default () => {
           name: '用户配置',
           url: 'userManage',
           children: [
-            { name: '用户管理', url: 'userManage' },
             { name: '图片懒加载', url: 'lazyload' },
           ]
         }
       ]
     },
-  ];
+    {
+      name: '框架进阶',
+      url: 'Advanced',
+      icon: 'rise',
+      children: [
+        { name: 'pure组件', url: 'pureComponent' },
+        { name: '普通组件', url: 'compareComponent' },
+      ]
+    }
+  ]
 }
