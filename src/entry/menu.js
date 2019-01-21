@@ -30,6 +30,15 @@ export default () => {
         { name: 'pure组件', url: 'pureComponent' },
         { name: '普通组件', url: 'compareComponent' },
       ]
+    },
+    {
+      name: 'es6',
+      url: 'AdvancedEs6',
+      icon: 'book',
+      children: [
+        //反射
+        { name: 'Reflect', url: 'Reflect' },
+      ]
     }
   ]
 }

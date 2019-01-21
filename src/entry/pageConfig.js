@@ -19,6 +19,10 @@ const defaultPages = {
     breadName: ['react组件 ', 'pure组件'],
     loader: () => import('../views/pureComponent/compareComponent.js')
   },
+  '/Reflect': {
+    breadName: ['es6', 'Reflect组件'],
+    loader: () => import('../views/es6/Reflect.js')
+  },
   '/404': {
     hideBread: true,
     loader: () => import('../views/404Pages/404'),
