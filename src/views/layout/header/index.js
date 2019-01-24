@@ -62,7 +62,6 @@ export default class Top extends React.Component {
 
   render() {
     const loginUser = this.props.loginUser && this.props.loginUser.principal || {}
-    console.log(loginUser)
     return (
       <Header className='header-top' style={{ background: '#fff' }}>
         <CustomBread className='header-bread'/>

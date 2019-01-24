@@ -39,6 +39,11 @@ export default () => {
         //反射
         { name: 'Reflect', url: 'Reflect' },
       ]
+    },
+    {
+      name: 'boxReflect',
+      url: 'boxReflect',
+      icon: 'solution',
     }
   ]
 }

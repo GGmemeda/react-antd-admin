@@ -23,6 +23,10 @@ const defaultPages = {
     breadName: ['es6', 'Reflect组件'],
     loader: () => import('../views/es6/Reflect.js')
   },
+  '/boxReflect': {
+    breadName: ['倒影'],
+    loader: () => import('../views/boxReflect')
+  },
   '/404': {
     hideBread: true,
     loader: () => import('../views/404Pages/404'),
