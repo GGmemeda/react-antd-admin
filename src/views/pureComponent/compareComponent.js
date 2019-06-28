@@ -1,5 +1,6 @@
-import React,{  Component } from 'react'
-import { shallowEqualImmutable } from 'react-immutable-render-mixin';
+import React, {Component} from 'react'
+import {shallowEqualImmutable} from 'react-immutable-render-mixin';
+import {race} from "../../utils";
 
 /**
  * 使用immutable多组件进行优化
@@ -16,6 +17,35 @@ export default class PuStudy extends Component {
       }
     }
   }
+
+  componentWillMount() {
+    race([]).then(() => {
+    }).catch(err => {
+      console.log(err)
+    });
+    race([
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(100)
+        }, 1000)
+      }),
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve(200)
+        }, 200)
+      }),
+      new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject(100)
+        }, 100)
+      })
+    ]).then((data) => {
+      console.log(data);
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
   shouldComponentUpdate(nextProps, nextState) {
     return !shallowEqualImmutable(this.props, nextProps)
       || !shallowEqualImmutable(this.state, nextState);
@@ -33,6 +63,7 @@ export default class PuStudy extends Component {
       message: '更行一次'
     })
   }
+
   render() {
     console.log(' render normalComponent')
     return (

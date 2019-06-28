@@ -38,7 +38,7 @@ export const reducerPackage = (mutations, success, error) => (state = initialSta
         data: [],
         allData: {}
       };
-      if (typeof  error === 'function') {
+      if (typeof error === 'function') {
         const errorObj = error(action) || {};
         return Object.assign({}, errorDefaultObj, errorObj);
       }
@@ -49,7 +49,7 @@ export const reducerPackage = (mutations, success, error) => (state = initialSta
         data: action.payload.data,
         allData: action.payload
       });
-      if (typeof  success === 'function') {
+      if (typeof success === 'function') {
         const successObj = success(action) || {};
         return Object.assign({}, defaultObj, successObj);
       }
@@ -58,3 +58,27 @@ export const reducerPackage = (mutations, success, error) => (state = initialSta
       return state;
   }
 };
+/**
+ * 1.Promise.race 测试
+ */
+export const race = function (promises) {
+  return new Promise((resolve, reject) => {
+    //promises 必须是一个可遍历的数据结构，否则抛错
+    if (typeof promises[Symbol.iterator] !== 'function') {
+      Promise.reject('args is not iteratable!');
+    }
+    if (promises.length === 0) {
+      return;
+    } else {
+      for (let i = 0; i < promises.length; i++) {
+        Promise.resolve(promises[i]).then(data => {
+          resolve(data);
+          return;
+        }).catch(err => {
+          reject(err);
+          return;
+        })
+      }
+    }
+  })
+}
