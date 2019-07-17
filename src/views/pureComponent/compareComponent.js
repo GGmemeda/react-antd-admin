@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import {shallowEqualImmutable} from 'react-immutable-render-mixin';
 import {race} from "../../utils";
 
 /**
@@ -44,11 +43,6 @@ export default class PuStudy extends Component {
     }, (err) => {
       console.log(err);
     });
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return !shallowEqualImmutable(this.props, nextProps)
-      || !shallowEqualImmutable(this.state, nextState);
   }
 
   handleChangeText = () => {

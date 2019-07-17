@@ -165,6 +165,8 @@ module.exports = {
               {
                 loader: require.resolve('less-loader'),
                 options: {
+                  // 错误less: .bezierEasingMixin()
+                  javascriptEnabled: true,
                   modifyVars: { "@primary-color": "#387EE7" },
                 },
               },

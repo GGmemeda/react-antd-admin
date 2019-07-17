@@ -6,7 +6,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 // const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const {GenerateSW} = require('workbox-webpack-plugin');
 const eslintFormatter = require('react-dev-utils/eslintFormatter');
 const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -227,7 +227,7 @@ module.exports = {
       fileName: 'asset-manifest.json',
     }),
     // 生成一个能预缓存的 service worker，同时它能保持更新
-    new SWPrecacheWebpackPlugin({
+    new GenerateSW({
       // By default, a cache-busting query parameter is appended to requests
       // used to populate the caches, to ensure the responses are fresh.
       // cache-bust 跳过被 webpack hash 过的 url

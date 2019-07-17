@@ -1,7 +1,8 @@
 //基础配置
 import {combineReducers} from 'redux';
-import  localForage from 'localforage';
+import localForage from 'localforage';
 import {persistReducer} from 'redux-persist';
+import {connectRouter} from 'connected-react-router';
 //业务配置
 import {layoutLoading, emums, permission} from './basic';
 import * as login from './login';
@@ -15,13 +16,10 @@ const permissionConfig = {
   key: 'permission',
   storage: localForage,
 };
-const rootReducer = combineReducers({
+export default (history) => combineReducers({
   layoutLoading,
-  emums: persistReducer(emumsConfig, emums),
+  router: connectRouter(history),
   permission: persistReducer(permissionConfig, permission),
   ...login,
   ...user,
 });
-
-
-export default rootReducer;

@@ -1,4 +1,4 @@
-import React,{ PureComponent} from 'react'
+import React, {PureComponent} from 'react'
 
 /**
  * PureComponent
@@ -19,7 +19,14 @@ export default class PuStudy extends PureComponent {
     }
   }
 
+  componentDidMount() {
+    this.defaultVal({});
+  }
 
+  defaultVal = ({a = 1, b = 2}) => {
+    console.log(a);
+    console.log(b);
+  }
   handleChangeText = () => {
     this.setState({
       text: 'look look'
