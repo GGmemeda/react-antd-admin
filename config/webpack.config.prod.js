@@ -126,7 +126,7 @@ module.exports = {
                   plugins: () => [
                     require('postcss-flexbugs-fixes'),
                     autoprefixer({
-                      browsers: [
+                      overrideBrowserslist: [
                         '>1%',
                         'last 4 versions',
                         'Firefox ESR',
@@ -151,7 +151,7 @@ module.exports = {
                   plugins: () => [
                     require('postcss-flexbugs-fixes'),
                     autoprefixer({
-                      browsers: [
+                      overrideBrowserslist: [
                         '>1%',
                         'last 4 versions',
                         'Firefox ESR',
