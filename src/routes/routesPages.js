@@ -3,7 +3,7 @@ import { Route, Redirect, Switch } from 'react-router-dom';
 import pageConfig from '../entry/pageConfig';
 import { viewsConfig } from '../utils/viewTools';
 
-export default class RouterPages extends React.Component {
+export default class RouterPages extends React.PureComponent {
   render () {
     return (
       <Switch>
