@@ -16,13 +16,10 @@ export default class CusTable extends React.Component {
     };
   }
 
-  // componentWillReceiveProps(props) {
-  //   this.getColumns(this.props.header);
-  // }
-
   getColumns = (headers) => {
     const {
       action,
+      hideOperate
     } = this.props;
     const columns = this.props.noIndex ? [] : [{
       dataIndex: 'rowIndex',
@@ -38,7 +35,7 @@ export default class CusTable extends React.Component {
     }
     if (action) {
       const maxActionCount = action() && action().length || 0;
-      if (!action()||action()&&action().length<1) {
+      if (!action()&&!hideOperate || action() && action().length < 1&&!hideOperate) {
         // eslint-disable-next-line
         return columns;
       }
@@ -47,11 +44,11 @@ export default class CusTable extends React.Component {
         title: '操作',
         // className: 'no-padding text-center',
         className: 'table-no-padding text-center',
-        width: maxActionCount * 45,
+        width: maxActionCount * 60,
         fixed: this.props.fixed || null,
         render: (row) => {
           const actions = action(row);
-          const colWidth=actions.length * 45 ;
+          const colWidth = actions.length * 60;
           if (!actions) {
             return <div/>;
           }
@@ -76,7 +73,7 @@ export default class CusTable extends React.Component {
               }}
               style={useStyle}
             >{name}
-              { atdIcon ? <span className='hide-icon icon-margin'>
+              {atdIcon ? <span className='hide-icon icon-margin'>
                   {atdIcon ? <Icon type={atdIcon}/> : ''}
                 {customIcon}
               </span> : ''}
@@ -85,22 +82,14 @@ export default class CusTable extends React.Component {
           });
           return {
             children: (<span>{buttons}</span>),
-            props: {width:colWidth ,}
+            props: {width: colWidth,}
           };
         },
       });
     }
     return columns;
   };
-  refreshButton = () => {
-    const refreshButton = (<i onClick={(e) => {
-      e.preventDefault();
-      if ('tableRefresh' in this.props) {
-        this.props.tableRefresh(e);
-      }
-    }} className='iconfont icon-shuaxin table-shuaxin active-text'/>);
-    return refreshButton;
-  };
+
   /** 操作详情下拉选项 */
   getActionItem = (parent, children, row) => {
     const menu = (
@@ -158,57 +147,72 @@ export default class CusTable extends React.Component {
       this.props.onChange(current, pageSize);
     }
   };
-  defaultRowSelection = {
-    type: 'checkbox',
-    fixed: true
-  };
 
-  render() {
-    const instance = this;
-    const {currentPage, header} = this.props;
+  // 集合所有table props
+  constructorProps = () => {
+    const {className = '', size = 'default', rowClassName = '', loading=false, header, options, footer,pagination} = this.props;
     const columns = this.getColumns(header);
-    const tableData = this.props.data.map((row, i) => ({...row, rowIndex: i + 1, key: i + 1}));
+    const tableData = this.props.data.map((row, i) => {
+      return {...row, rowIndex: i + 1, key: row.key || i + 1};
+    });
+    let defaultProps = {
+      bordered: true,
+      className: ` common-table clearfix table-normal ${className}`,
+      size: size,
+      locale: {emptyText: '暂无数据'},
+      dataSource: tableData,
+      columns: columns,
+      rowClassName: rowClassName,
+      loading: loading
+    };
     if (this.props.rowSelection) {
-      this.defaultRowSelection = Object.assign({}, this.defaultRowSelection, this.props.rowSelection);
-    } else {
-      this.defaultRowSelection = null;
+      defaultProps.rowSelection = Object.assign({}, {
+        type: 'checkbox',
+        fixed: true
+      }, this.props.rowSelection);
     }
-
     if (this.props.scroll && this.props.scroll.x) {
+      let scrollData = this.props.scroll;
       let widNum = 0;
       columns.map(ele => {
-        widNum += ele.width||0;
+        widNum += ele.width || 0;
       });
-      this.props.scroll.x = widNum + 50;
+      scrollData.x = widNum + 50;
+      defaultProps.scroll = scrollData;
     }
+    if (pagination!==false){
+      defaultProps.pagination = {
+        total: this.props.total || 1,
+        pageSize: this.state.pageSize,
+        current: this.props.currentPage,
+        size: this.props.size || 'small',
+        onChange: this.onPageChangeHandler,
+        onShowSizeChange: this.onShowSizeChange,
+        showSizeChanger: this.props.sizeChange,
+        pageSizeOptions: ['10', '20', '50'],
+        showTotal(total, range) {
+          return <span className={styles.pageTotal}><span
+            className='table-total-show'>共<span
+            className={styles.count}>{total}</span>项</span>  </span>;
+        },
+      };
+    }
+    else{
+      defaultProps.pagination=false;
+    }
+    if (footer) {
+      defaultProps.footer = footer;
+    }
+    if (options) {
+      defaultProps = Object.assign(defaultProps,options);
+    }
+    return defaultProps;
+  };
+  render() {
+    const props = this.constructorProps();
     return (
       <Table
-        rowSelection={this.defaultRowSelection || null}
-        bordered
-        className={`${this.props.tableType || "common-table"} clearfix table-normal`}
-        locale={{emptyText: '暂无数据'}}
-        scroll={this.props.scroll}
-        size={this.props.size || 'default'}
-        dataSource={tableData}
-        columns={columns}
-        rowClassName={this.props.getRowClassName}
-        loading={this.props.loading}
-        pagination={this.props.pagination !== false ? {
-          total: this.props.total || 1,
-          pageSize: this.state.pageSize,
-          current: currentPage,
-          size: this.props.size || 'small',
-          onChange: this.onPageChangeHandler,
-          onShowSizeChange: this.onShowSizeChange,
-          showSizeChanger: this.props.sizeChange,
-          pageSizeOptions: ['10', '20', '50'],
-          showTotal(total, range) {
-            return <span className={styles.pageTotal}>{instance.refreshButton()}<span
-              className='table-total-show'>显示第{range[0]}至{range[1]}结果，共<span
-              className={styles.count}>{total}</span>项</span>  </span>;
-          },
-        } : false}
-        footer={this.props.footer}
+        {...props}
       />
     );
   }
