@@ -1,71 +1,57 @@
 @import "../../style/variable";
 
-.scroll-table, .common-table {
-  width: 100%;
-  background: #fff;
-}
-
 .table-normal {
   padding: 0 10px;
-
+  width: 100%;
+  background: #fff;
   table {
     font-size: @font-size-base;;
-
     .operate-single-button:hover {
       display: inline-block;
-
       .icon-margin {
         visibility: visible !important;
       }
     }
-
     .hide-icon {
       visibility: hidden;
     }
-
     .operate-single-button {
+      //min-width: 45px;
+      //width: 45px;
       display: inline-block;
       text-align: left;
       white-space: nowrap;
     }
-
     .icon-margin {
       margin-left: 5px;
-
       .rvicon {
         font-size: 12px;
       }
     }
   }
-
   .ant-table-thead {
     background: rgb(35, 35, 35);
-
     th {
       height: 36px;
       padding: 0;
       text-align: center;
+      //background: rgb(248, 248, 248);
     }
   }
-
-  .ant-table-tbody {
+  .ant-table-tbody{
     tr:hover {
       background: rgba(56, 126, 231, 0.06)
     }
-
     tr:nth-child(2n) {
       background: rgba(247, 247, 247, 1);
     }
   }
-
   td.ant-table-selection-column, th.ant-table-selection-column {
     min-width: 50px !important;
     width: 50px !important;
   }
-
   td {
     padding: 5px 10px !important;
-
     .ant-upload-list-item {
       border: none;
       padding: 0;
@@ -74,16 +60,13 @@
       margin: 0 !important;
       text-align: center;
     }
-
     .images {
       display: inline-block;
     }
   }
-
   .table-no-padding {
     padding: 0 !important;
   }
-
   .ant-pagination {
     width: 100%;
     text-align: right;
@@ -92,25 +75,20 @@
     margin: 0;
     border-top: none;
     padding: 12px 0;
-
     .ant-select-selection:focus {
       color: @contentText;
     }
-
     .ant-pagination-options {
       margin-left: 20px !important;
     }
   }
-
   .table-total-show {
     color: #343434;
     margin: 0 20px;
   }
-
   .ant-pagination-total-text {
     margin-right: 10px;
   }
-
   .pageTotal {
     .count {
       margin: 0 4px;
@@ -122,3 +100,6 @@
     float: none;
   }
 }
+
+
+

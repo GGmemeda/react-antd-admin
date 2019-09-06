@@ -157,7 +157,7 @@ export default class CusTable extends React.Component {
     });
     let defaultProps = {
       bordered: true,
-      className: ` common-table clearfix table-normal ${className}`,
+      className: `  table-normal clearfix ${className}`,
       size: size,
       locale: {emptyText: '暂无数据'},
       dataSource: tableData,
