@@ -9,13 +9,11 @@ import {ConnectedRouter} from 'connected-react-router';
 import history from 'utils/history';
 import {setInterceptors} from 'utils/request';
 import {PersistGate} from 'redux-persist/integration/react';
-import moment from 'moment';
-import momentLocale from 'moment/locale/zh-cn';
-import zhCN from 'antd/lib/locale-provider/zh_CN';
-import {LocaleProvider} from "antd";
+import'dayjs/locale/zh-cn'
+import {ConfigProvider } from "antd";
 import {LastLocationProvider} from 'react-router-last-location';
+import zhCN from 'antd/es/locale/zh_CN';
 
-moment.updateLocale('zh-cn', momentLocale);
 setInterceptors(store);
 
 ReactDOM.render(
@@ -23,11 +21,11 @@ ReactDOM.render(
     <PersistGate loading={null} persistor={persistor}>
       <ConnectedRouter history={history}>
         <LastLocationProvider>
-          <LocaleProvider locale={zhCN}>
+          <ConfigProvider  locale={zhCN}>
             <div>
               <Routes/>
             </div>
-          </LocaleProvider>
+          </ConfigProvider>
         </LastLocationProvider>
       </ConnectedRouter>
     </PersistGate>

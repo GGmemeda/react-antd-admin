@@ -1,31 +1,18 @@
 /**
  *页面菜单配置项，可更具习惯把权限放于其中
  */
+import {HomeOutlined} from '@ant-design/icons';
 export default () => {
   return [
     {
       name: '首页',
       url: 'index',
-      icon: 'home',
-    },
-    {
-      name: '基础信息',
-      url: 'basicMessage',
-      icon: 'user',
-      children: [
-        {
-          name: '用户配置',
-          url: 'userManage',
-          children: [
-            { name: '图片懒加载', url: 'lazyload' },
-          ]
-        }
-      ]
+      icon: HomeOutlined,
     },
     {
       name: '框架进阶',
       url: 'Advanced',
-      icon: 'rise',
+      icon: HomeOutlined,
       children: [
         { name: 'pure组件', url: 'pureComponent' },
         { name: '普通组件', url: 'compareComponent' },
@@ -34,7 +21,7 @@ export default () => {
     {
       name: 'es6',
       url: 'AdvancedEs6',
-      icon: 'book',
+      icon: HomeOutlined,
       children: [
         //反射
         { name: 'Reflect', url: 'Reflect' },
@@ -43,7 +30,7 @@ export default () => {
     {
       name: 'boxReflect',
       url: 'boxReflect',
-      icon: 'solution',
+      icon: HomeOutlined,
     }
   ]
 }

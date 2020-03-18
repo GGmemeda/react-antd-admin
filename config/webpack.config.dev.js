@@ -12,6 +12,7 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const getClientEnvironment = require('./env');
 const AnalyzeWebpackPlugin = require('analyze-webpack-plugin').default
 const paths = require('./paths');
+const AntdDayjsWebpackPlugin =require('antd-dayjs-webpack-plugin') ;
 
 const publicPath = '/';
 
@@ -192,6 +193,8 @@ module.exports = {
       inject: true,
       template: paths.appHtml,
     }),
+    // antd中dayjs代替moment
+    new AntdDayjsWebpackPlugin(),
     // 当开启 HMR 的时候使用该插件会显示模块的相对路径，建议用于开发环境。作用没理解~
     // new webpack.NamedModulesPlugin(),
     // 区别开发模式和发布模式的全局变量

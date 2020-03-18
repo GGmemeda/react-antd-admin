@@ -26,7 +26,6 @@ const formItemLayout = {
   },
 };
 const FormItem = Form.Item;
-@Form.create()
 @connect(
   (state) => {
     return ({

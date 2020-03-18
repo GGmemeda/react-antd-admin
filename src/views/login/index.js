@@ -1,64 +1,58 @@
 import React from 'react';
-import { Form, Input, Button, notification, Icon, message } from 'antd';
+import {Form, Input, Button, notification, Icon, message} from 'antd';
 import './index.less';
-import { setToken, auth } from 'utils/auth';
+import {setToken, auth} from 'utils/auth';
 import history from '../../utils/history';
-import { login } from 'api';
-import { connect } from 'react-redux';
-import { loginUser } from 'actions/login';
-import { actionEmums } from 'actions/basic';
-import { chiefManage, user } from '../../api';
-import { refreshUser } from '../../redux/actions/login';
+import {connect} from 'react-redux';
+import {loginUser} from 'actions/login';
+import {actionEmums} from 'actions/basic';
+import {refreshUser} from '../../redux/actions/login';
+import {CloseOutlined, UserOutlined, LockOutlined} from '@ant-design/icons';
 
 const FormItem = Form.Item;
-
 @connect(
   (state) => {
     return ({
       emums: state.emums,
       loginUserData: state.loginUser.allData,
     });
-  }, { loginUser, actionEmums, refreshUser }
+  }, {loginUser, actionEmums, refreshUser}
 )
-@Form.create()
 export default class LoginPage extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
       loading: false
     };
   }
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    this.props.form.validateFields((err, values) => {
-      if (!err) {
-        history.push('');
-        this.enterLoading(true);
-        setToken('aaaa');
-        setTimeout(() => {
-          this.enterLoading(false);
-        }, 100);
-      }
-    });
-
+  // form组件使用
+  formRef = React.createRef();
+  handleSubmit = (values) => {
+    this.formRef.current.validateFields().then(values=>{
+      history.push('');
+      this.enterLoading(true);
+      setToken('aaaa');
+      setTimeout(() => {
+        this.enterLoading(false);
+      }, 100);
+    })
   };
   enterLoading = (status) => {
-    this.setState({ loading: status });
+    this.setState({loading: status});
   };
 
   onChangeUserName = (e) => {
-    this.props.form.setFieldsValue({ 'userName': e.target.value });
+    this.formRef.current.setFieldsValue({'userName': e.target.value});
   };
 
   emitEmpty = () => {
     this.userNameInput.focus();
-    this.props.form.setFieldsValue({ 'userName': '' });
+    this.formRef.current.setFieldsValue({'userName': ''});
   };
 
-  render () {
-    const { getFieldDecorator } = this.props.form;
-    const suffix = this.props.form.getFieldsValue().userName ?
+  render() {
+    console.log(this.formRef.current && this.formRef.current.getFieldValue());
+    const suffix = this.formRef.current && this.formRef.current.getFieldValue().userName ?
       <Icon type="close-circle" onClick={this.emitEmpty}/> : null;
     return (
       <div className="login-page-wrap">
@@ -69,29 +63,32 @@ export default class LoginPage extends React.Component {
                 <div className='box-title'>
                   登 陆
                 </div>
-                <Form onSubmit={this.handleSubmit}>
-                  <FormItem>
-                    {getFieldDecorator('userName', {
-                      rules: [{ required: true, message: '请输入用户名' }],
-                    })(
-                      <Input
-                        placeholder="请输入用户名"
-                        prefix={<Icon type="user" className="icon-change"/>}
-                        suffix={suffix}
-                        onChange={this.onChangeUserName}
-                        ref={node => this.userNameInput = node}
-                      />
-                    )}
+                <Form ref={this.formRef} onFinish={this.handleSubmit}>
+                  <FormItem
+                    noStyle
+                    shouldUpdate
+                  >
+                    {({getFieldValue}) => {
+                      const suffix = getFieldValue('userName') ?
+                        <CloseOutlined onClick={this.emitEmpty}/> : null;
+                      return (
+                        <FormItem name={'userName'} rules={[{required: true, message: '请输入用户名'}]}>
+                          <Input
+                            placeholder="请输入用户名"
+                            prefix={<UserOutlined className="icon-change"/>}
+                            suffix={suffix}
+                            onChange={this.onChangeUserName}
+                            ref={node => this.userNameInput = node}
+                          />
+                        </FormItem>
+                      )
+                    }}
                   </FormItem>
-                  <FormItem>
-                    {getFieldDecorator('password', {
-                      rules: [{ required: true, message: '请输入密码' }],
-                    })(
-                      <Input type="password"
-                             placeholder="请输入密码"
-                             prefix={<Icon type="lock" className="icon-change"/>}
-                      />
-                    )}
+                  <FormItem name={'password'} rules={[{required: true, message: '请输入密码'}]}>
+                    <Input type="password"
+                           placeholder="请输入密码"
+                           prefix={<LockOutlined  className="icon-change"/>}
+                    />
                   </FormItem>
                   <Button type="primary" htmlType="submit" className="loginBtn"
                           loading={this.state.loading}>立即登录</Button>

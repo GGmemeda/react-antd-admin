@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {DatePicker } from 'antd';
 import './index.less';
 
 export default class App extends Component {
@@ -8,6 +9,7 @@ export default class App extends Component {
         <div className="home-container">
           我是首页哦
           看看hook的表现形式
+          <DatePicker  />
           <React.Fragment>
             <div>
               fragement测试一下

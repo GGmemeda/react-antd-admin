@@ -1,10 +1,11 @@
 import React from 'react'
-import { Menu, Icon, Layout, Avatar, Dropdown, Badge, message } from 'antd'
+import { Menu, Icon, Layout, Avatar, Dropdown, Badge, message } from 'antd';
+import { UserOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom'
 import './index.less'
 import { removeToken, clearAuth } from 'utils/auth'
 import { connect } from 'react-redux'
-import ResetPwd from './ResetPwd'
+// import ResetPwd from './ResetPwd'
 import CustomBread from '../customBread'
 
 const { Header } = Layout
@@ -38,11 +39,11 @@ export default class Top extends React.Component {
       location.href = '/login'
       clearAuth()
     }
-    if (item.key === 'resetPwd') {
-      this.setState({
-        visible: true
-      })
-    }
+    // if (item.key === 'resetPwd') {
+    //   this.setState({
+    //     visible: true
+    //   })
+    // }
   }
   goMessagePage = () => {
 
@@ -71,14 +72,14 @@ export default class Top extends React.Component {
               <i className='rvicon rvicon-xiaoxi'/>
             </Badge>
           </span>
-          <Avatar src={loginUser.avatarUrl} className='user-img' icon="user"/>
+          <Avatar src={loginUser.avatarUrl} className='user-img' icon={<UserOutlined />}/>
           <Dropdown overlay={this.menu}>
             <a className="ant-dropdown-link">
               {loginUser.nickname} <Icon type="down"/>
             </a>
           </Dropdown>
         </div>
-        <ResetPwd onCancel={this.onCancel} visible={this.state.visible}/>
+        {/*<ResetPwd onCancel={this.onCancel} visible={this.state.visible}/>*/}
       </Header>
     )
   }

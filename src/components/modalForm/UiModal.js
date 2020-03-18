@@ -4,8 +4,8 @@ import './index.less';
 import {
   Modal,
   Spin,
-  Icon
 } from 'antd';
+import {CloseCircleOutlined } from '@ant-design/icons';
 
 export default class UiModal extends React.Component {
 
@@ -36,7 +36,7 @@ export default class UiModal extends React.Component {
             {modalKey === 'look' ? <i className='rvicon rvicon-chuli mr-s active-text'/> :
               <i className=' rvicon rvicon-bianji active-text mr-s'/>}{title}</span>
           <span onClick={onCancel} className='right-close'>
-            <Icon className='close-icon' type="close-circle-o"/></span>
+            <CloseCircleOutlined className='close-icon' /></span>
         </div>
         <Spin spinning={loading} tip="Loading...">
           <div className='modal-content'>

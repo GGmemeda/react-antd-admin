@@ -3,7 +3,7 @@ import CusTable from 'components/table';
 import { connect } from 'react-redux';
 import { list } from 'actions/user';
 import { actionLoading } from 'actions/basic';
-import { Input, message, Divider, Modal, Icon } from 'antd';
+import { Input, message, Divider, Modal } from 'antd';
 import SearchBar from '../../../components/searchbar';
 import { FormModal } from '../../../components/modalForm';
 import { FormField } from './formModalAdd';

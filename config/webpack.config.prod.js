@@ -12,13 +12,14 @@ const ModuleScopePlugin = require('react-dev-utils/ModuleScopePlugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const paths = require('./paths');
 const getClientEnvironment = require('./env');
-
+const AntdDayjsWebpackPlugin=require('antd-dayjs-webpack-plugin');
 // 从哪里获取服务，需要一个末尾斜杠
 const publicPath = paths.servedPath;
 // Source maps are resource heavy and can cause out of memory issue for large source files.
 const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 const publicUrl = publicPath.slice(0, -1);
 const env = getClientEnvironment(publicUrl);
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 // 下面代码仅仅出于安全
 if (env.stringified['process.env'].NODE_ENV !== '"production"') {
@@ -165,6 +166,7 @@ module.exports = {
               {
                 loader: require.resolve('less-loader'),
                 options: {
+                  javascriptEnabled: true,
                   modifyVars: { "@primary-color": "#1890ff" },
                 },
               },
@@ -219,6 +221,8 @@ module.exports = {
         minifyURLs: true,
       },
     }),
+    // antd中dayjs代替moment
+    new AntdDayjsWebpackPlugin(),
     new webpack.DefinePlugin(env.stringified),
     // Generate a manifest file which contains a mapping of all asset filenames
     // to their corresponding output file so that tools can pick it up without
@@ -232,30 +236,31 @@ module.exports = {
       // used to populate the caches, to ensure the responses are fresh.
       // cache-bust 跳过被 webpack hash 过的 url
       dontCacheBustUrlsMatching: /\.\w{8}\./,
-      filename: 'service-worker.js',
-      logger(message) {
-        if (message.indexOf('Total precache size is') === 0) {
-          return;
-        }
-        if (message.indexOf('Skipping static resource') === 0) {
-          return;
-        }
-        console.log(message);
-      },
-      minify: true,
+      // filename: 'service-worker.js',
+      // logger(message) {
+      //   if (message.indexOf('Total precache size is') === 0) {
+      //     return;
+      //   }
+      //   if (message.indexOf('Skipping static resource') === 0) {
+      //     return;
+      //   }
+      //   console.log(message);
+      // },
+      // minify: true,
       // For unknown URLs, fallback to the index page
       navigateFallback: publicUrl + '/index.html',
       // Ignores URLs starting from /__ (useful for Firebase):
       // https://github.com/facebookincubator/create-react-app/issues/2237#issuecomment-302693219
       navigateFallbackWhitelist: [/^(?!\/__).*/],
       // Don't precache sourcemaps (they're large) and build asset manifest:
-      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+      // staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
     }),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/), // 实验减少了 47.68 kb
+    // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/), // 实验减少了 47.68 kb
     new MiniCssExtractPlugin({
       filename: "static/css/[name].css",
       chunkFilename: "static/css/[id].css"
     }),
+    new BundleAnalyzerPlugin()
   ],
   node: { // 这个对体积没影响，应该对项目引用有间接影响
     dgram: 'empty',

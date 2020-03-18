@@ -1,5 +1,4 @@
-import moment from 'moment';
-import {message} from 'antd';
+import moment from 'dayjs';
 
 
 /**

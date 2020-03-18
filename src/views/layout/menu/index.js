@@ -1,11 +1,11 @@
 import allMenu from '@/entry/menu';
-import {Menu, Icon} from 'antd';
+import {Menu} from 'antd';
 import React from 'react';
 import {Link} from 'react-router-dom';
 import './index.less';
 
 
-const SubMenu = Menu.SubMenu;
+const { SubMenu } = Menu;
 
 
 export default class Nav extends React.Component {
@@ -71,7 +71,7 @@ export default class Nav extends React.Component {
         if (subMenu.permission && !this.requireAuth(subMenu.permission)) return;
         return (<SubMenu key={subMenu.url} className={this.currentActive(subMenu.url)}
                          title={<div className='menu-link'>
-                           <Icon type={subMenu.icon} theme="outlined" />
+                           <subMenu.icon/>
                            <span className='menu-name'>{subMenu.name}</span>
                          </div>}>
           {this.constructMenu(subMenu.children, currentString)}
@@ -83,7 +83,7 @@ export default class Nav extends React.Component {
         return (
           <Menu.Item key={subMenu.url}>
             <Link to={`/${subMenu.url}`} className='menu-link'>
-              {subMenu.icon ?  <Icon type={subMenu.icon} theme="outlined" /> : ''}
+              {subMenu.icon ?  <subMenu.icon/> : ''}
               <span className='menu-name'>{subMenu.name}</span>
             </Link>
           </Menu.Item>
