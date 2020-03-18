@@ -1,0 +1,53 @@
+.time-corona {
+  position: absolute;
+  //right: 0.4rem;
+  //bottom: 1.3rem;
+  width: 293px;
+  height: 293px;
+  z-index: 99999;
+  background-repeat: no-repeat;
+  background-size: cover;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  .container {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    .title-container {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 30px;
+      .title {
+        position: absolute;
+        font-size: 22px;
+        color: #ffffff;
+        user-select: none;
+        transform: translateY(30px);
+        transition: all ease-out .2s;
+      }
+    }
+  }
+  .canvas {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+  }
+  .lottie-container {
+    position: absolute;
+    top: 36.5px;
+    left: 36.5px;
+    width: 220px;
+    height: 220px;
+    z-index: 1;
+  }
+
+}
