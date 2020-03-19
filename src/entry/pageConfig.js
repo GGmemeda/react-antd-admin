@@ -23,6 +23,10 @@ const defaultPages = {
     breadName: ['倒影'],
     loader: () => import('../views/boxReflect')
   },
+  '/Simple': {
+    breadName: ['Hook'],
+    loader: () => import('../Hook/simple')
+  },
   '/404': {
     hideBread: true,
     loader: () => import('../views/404Pages/404'),

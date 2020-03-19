@@ -13,6 +13,7 @@ export const refreshUser = (data) => ({
   type: LOGINBYUSER,
   payload: {
     promise: ()=>{
+      console.log('refreshUser,redux action');
       return new Promise(resolve=>{
         resolve(data)
       })

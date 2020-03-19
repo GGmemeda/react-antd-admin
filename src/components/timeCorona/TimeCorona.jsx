@@ -2,7 +2,7 @@ import React from 'react';
 import background from './assets/background.png'
 import pointer from './assets/pointer.png'
 import data from './assets/data.json'
-import './TimeCorona.scss';
+import './TimeCorona.less';
 import lottie from 'lottie-web';
 
 const r = 131.5
@@ -189,7 +189,7 @@ class TimeCorona extends React.PureComponent {
 
   // MARK: - 鼠标按起
   _onMouseUp = () => {
-    if(this.isDraged) {
+    if (this.isDraged) {
       this.anim.playSegments([5, 0], true)
     }
     this.isDraged = false;
@@ -268,9 +268,9 @@ class TimeCorona extends React.PureComponent {
   render() {
     const {activeIndex, scale} = this.state;
     let offsetX = 40 * scale - (circleX * (1 - scale));
-    offsetX = offsetX >=0 ? offsetX : 0
+    offsetX = offsetX >= 0 ? offsetX : 0
     let offsetY = 130 * scale - (circleY * (1 - scale));
-    offsetY = offsetY >=0 ? offsetY : 0
+    offsetY = offsetY >= 0 ? offsetY : 0
     return (
       <div className="time-corona"
            ref={this.timeCorona}

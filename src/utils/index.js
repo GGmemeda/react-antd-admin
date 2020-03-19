@@ -16,7 +16,7 @@ export const urlParam = function (url) {
  */
 export const initialState = {
   isFetching: false,
-  data: []
+  data: '我是redux初始参数'
 };
 /**
  * reducer可使用
