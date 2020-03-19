@@ -10,6 +10,7 @@ import history from '../utils/history';
 const reducers = rootReducer(history);
 let enhancer;
 if (process.env.NODE_ENV === 'development') {
+  console.log('当前是开发者环境');
   enhancer = compose(
     applyMiddleware(thunk, logger, promiseMiddleware({promiseTypeSuffixes: ['PENDING', 'SUCCESS', 'ERROR']})),
     DevTools.instrument()

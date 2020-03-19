@@ -22,9 +22,10 @@ ReactDOM.render(
       <ConnectedRouter history={history}>
         <LastLocationProvider>
           <ConfigProvider  locale={zhCN}>
-            <div>
+            {/*<div>*/}
               <Routes/>
-            </div>
+              {/*<DevTools/>*/}
+            {/*</div>*/}
           </ConfigProvider>
         </LastLocationProvider>
       </ConnectedRouter>

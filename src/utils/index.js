@@ -16,7 +16,7 @@ export const urlParam = function (url) {
  */
 export const initialState = {
   isFetching: false,
-  data: '我是redux初始参数'
+  data: []
 };
 /**
  * reducer可使用
@@ -26,10 +26,10 @@ export const initialState = {
  * @returns {Function}
  */
 
-export const reducerPackage = (mutations, success, error) => (state = initialState, action) => {
+export const reducerPackage = (mutations, init = {}, success, error) => (state = initialState, action) => {
   switch (action.type) {
     case `${mutations}_PENDING`:
-      return Object.assign({}, initialState, {
+      return Object.assign({}, initialState, init, {
         isFetching: true
       });
     case `${mutations}_ERROR`:
@@ -55,7 +55,7 @@ export const reducerPackage = (mutations, success, error) => (state = initialSta
       }
       return defaultObj;
     default:
-      return state;
+      return init || state;
   }
 };
 /**
